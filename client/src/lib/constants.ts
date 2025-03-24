@@ -88,30 +88,43 @@ export const education = [
   {
     type: "certification",
     title: "Data Science Certification",
-    institution: "ExcelR Solutions",
-    period: "2022",
-    description: "Comprehensive data science program covering Python, SQL, machine learning, and data visualization techniques.",
+    institution: "Excel-R",
+    period: "2023",
+    description: "Comprehensive data science program covering advanced analytics, machine learning, and data visualization techniques.",
     certificateUrl: "#"
   },
   {
     type: "internship",
-    title: "Data Science Intern",
-    institution: "LooMA, Hyderabad",
-    period: "Jan 2023 - Mar 2023",
-    description: "Worked on developing machine learning models for text classification, sentiment analysis, and customer segmentation. Collaborated with a team of data scientists to implement NLP algorithms.",
+    title: "Data Science Internship",
+    institution: "Excel-R",
+    period: "2023",
+    description: "Hands-on experience in implementing data science concepts, developing ML models, and data analysis.",
     certificateUrl: "#"
   },
   {
     type: "internship",
-    title: "Data Analyst Intern",
-    institution: "AccelerateBS, Hyderabad",
-    period: "Oct 2022 - Dec 2022",
-    description: "Analyzed large datasets to identify business trends and created visualizations using Power BI and Tableau. Developed Python scripts for data processing and cleaning.",
+    title: "Artificial Intelligence Internship",
+    institution: "LOOMA IT SOLUTION",
+    period: "2023",
+    description: "Worked on AI projects implementing machine learning algorithms and deep learning models.",
+    certificateUrl: "#"
+  },
+  {
+    type: "internship",
+    title: "Python Programming Internship",
+    institution: "APSSDC",
+    period: "2023",
+    description: "Developed strong programming fundamentals and practical experience in Python development.",
     certificateUrl: "#"
   },
   {
     type: "certification",
-    title: "Certification in Data Science with Python and SQL",
+    title: "Pattern Recognition and Its Applications",
+    institution: "NPTEL",
+    period: "2023",
+    description: "Advanced course in pattern recognition techniques and their practical applications in data science.",
+    certificateUrl: "#"
+  },
     institution: "ExcelR Solutions",
     period: "2022",
     description: "Mastered data manipulation, analysis, and visualization techniques using Python and SQL. Developed skills in database management and data extraction.",
