@@ -45,14 +45,14 @@ const Navbar = () => {
         {/* Desktop Navigation */}
         <nav className="hidden md:flex items-center space-x-8">
           {navLinks.map((link) => (
-            <Link key={link.href} href={link.href}>
-              <a
-                className={`hover:text-primary transition-colors ${
-                  location === link.href ? "text-primary" : "text-foreground"
-                }`}
-              >
-                {link.label}
-              </a>
+            <Link 
+              key={link.href} 
+              href={link.href}
+              className={`hover:text-primary transition-colors ${
+                location === link.href ? "text-primary" : "text-foreground"
+              }`}
+            >
+              {link.label}
             </Link>
           ))}
         </nav>
@@ -67,16 +67,16 @@ const Navbar = () => {
           <SheetContent className="bg-background/95 backdrop-blur-sm">
             <nav className="flex flex-col gap-4 mt-8">
               {navLinks.map((link) => (
-                <Link key={link.href} href={link.href}>
-                  <a
-                    className={`text-lg py-2 hover:text-primary transition-colors ${
-                      location === link.href
-                        ? "text-primary"
-                        : "text-foreground"
-                    }`}
-                  >
-                    {link.label}
-                  </a>
+                <Link 
+                  key={link.href} 
+                  href={link.href}
+                  className={`text-lg py-2 hover:text-primary transition-colors ${
+                    location === link.href
+                      ? "text-primary"
+                      : "text-foreground"
+                  }`}
+                >
+                  {link.label}
                 </Link>
               ))}
             </nav>
