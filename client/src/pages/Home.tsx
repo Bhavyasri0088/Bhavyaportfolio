@@ -198,7 +198,7 @@ const Home = () => {
       <section 
         className="min-h-screen flex items-center justify-center relative overflow-hidden"
         style={{
-          backgroundImage: `url('/images/background.jpg')`,
+          backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.1)), url('/images/background.jpg')`,
           backgroundSize: 'cover',
           backgroundPosition: 'center',
           backgroundRepeat: 'no-repeat'
