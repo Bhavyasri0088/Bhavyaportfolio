@@ -25,19 +25,6 @@ export const projects = [
     technologies: ["Python", "NLTK", "Scikit-Learn", "Pandas", "Matplotlib", "Seaborn"],
     githubUrl: "https://github.com/Bhavyasri0088/Fake-and-real-news",
     reportUrl: "#"
-  },
-  {
-    id: 3,
-    title: "Financial Time-Series Forecasting",
-    description: "Created advanced time-series forecasting models to predict financial market trends, helping investors make data-driven decisions.",
-    insights: [
-      "Developed LSTM neural networks to capture complex patterns in stock prices",
-      "Implemented ARIMA and Prophet models for comparison of forecasting accuracy",
-      "Created interactive visualizations showing predicted vs. actual price movements"
-    ],
-    technologies: ["Python", "TensorFlow", "Pandas", "Plotly", "Prophet", "NumPy"],
-    githubUrl: "#",
-    reportUrl: "#"
   }
 ];
 
