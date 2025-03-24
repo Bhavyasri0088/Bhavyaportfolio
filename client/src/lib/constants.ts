@@ -79,10 +79,10 @@ export const skills = [
 export const education = [
   {
     type: "degree",
-    title: "Bachelor of Technology (ECE)",
-    institution: "Sreenidhi Institute of Science and Technology, Hyderabad",
-    period: "2018-2022",
-    description: "Completed B.Tech in Electronics and Communication Engineering with coursework in programming, statistics, and data analysis.",
+    title: "B.Tech (Electronics and Communication Engineering)",
+    institution: "Sri Padmavathi Mahila Vishvavidyalayam, Tirupati, Andhra Pradesh",
+    period: "2020-2024",
+    description: "Completing B.Tech in Electronics and Communication Engineering with coursework in programming, statistics, and data analysis.",
     certificateUrl: null
   },
   {
