@@ -156,12 +156,6 @@ const ChurnVisualization = () => {
             Distribution
           </button>
           <button 
-            onClick={() => setView('tenure')}
-            className={`text-xs px-2 py-1 rounded-full ${view === 'tenure' ? 'bg-primary text-white' : 'bg-muted'}`}
-          >
-            By Tenure
-          </button>
-          <button 
             onClick={() => setView('model')}
             className={`text-xs px-2 py-1 rounded-full ${view === 'model' ? 'bg-primary text-white' : 'bg-muted'}`}
           >
@@ -170,7 +164,6 @@ const ChurnVisualization = () => {
         </div>
         
         {view === 'distribution' && renderChurnDistribution()}
-        {view === 'tenure' && renderChurnByTenure()}
         {view === 'model' && renderModelPerformance()}
       </div>
     </DataVisualization>
