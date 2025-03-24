@@ -121,9 +121,25 @@ export const education = [
     type: "certification",
     title: "Pattern Recognition and Its Applications",
     institution: "NPTEL",
-    period: "2023",
     description: "Advanced course in pattern recognition techniques and their practical applications in data science.",
     certificateUrl: "#"
+  }
+];
+
+export const PROJECTS = [
+  {
+    title: "Customer Churn Prediction",
+    description: "Developed a machine learning model to predict customer churn using historical customer data. Implemented feature engineering and achieved 85% accuracy.",
+    technologies: ["Python", "Scikit-learn", "Pandas", "Matplotlib"],
+    demoUrl: "#",
+    githubUrl: "#"
+  },
+  {
+    title: "Fake News Detection",
+    description: "Built an NLP model to classify news articles as real or fake. Used BERT for text classification and achieved 92% accuracy.",
+    technologies: ["Python", "TensorFlow", "NLTK", "Transformers"],
+    demoUrl: "#",
+    githubUrl: "#"
   }
 ];
 
