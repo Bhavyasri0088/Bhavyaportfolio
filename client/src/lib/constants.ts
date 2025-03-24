@@ -79,10 +79,10 @@ export const skills = [
 export const education = [
   {
     type: "degree",
-    title: "Bachelor's Degree in Data Science",
-    institution: "University Name",
-    period: "2017-2021",
-    description: "Studied advanced algorithms, statistics, and programming with a focus on big data analytics and machine learning applications.",
+    title: "Bachelor of Technology (ECE)",
+    institution: "Sreenidhi Institute of Science and Technology, Hyderabad",
+    period: "2018-2022",
+    description: "Completed B.Tech in Electronics and Communication Engineering with coursework in programming, statistics, and data analysis.",
     certificateUrl: null
   },
   {
@@ -95,17 +95,25 @@ export const education = [
   },
   {
     type: "internship",
-    title: "AI Internship",
-    institution: "Looma Solutions",
-    period: "2022",
-    description: "Worked on developing machine learning models for text classification and sentiment analysis. Collaborated with a team of data scientists to implement NLP algorithms.",
+    title: "Data Science Intern",
+    institution: "LooMA, Hyderabad",
+    period: "Jan 2023 - Mar 2023",
+    description: "Worked on developing machine learning models for text classification, sentiment analysis, and customer segmentation. Collaborated with a team of data scientists to implement NLP algorithms.",
+    certificateUrl: "#"
+  },
+  {
+    type: "internship",
+    title: "Data Analyst Intern",
+    institution: "AccelerateBS, Hyderabad",
+    period: "Oct 2022 - Dec 2022",
+    description: "Analyzed large datasets to identify business trends and created visualizations using Power BI and Tableau. Developed Python scripts for data processing and cleaning.",
     certificateUrl: "#"
   },
   {
     type: "certification",
     title: "Certification in Data Science with Python and SQL",
-    institution: "ExcelR",
-    period: "2021",
+    institution: "ExcelR Solutions",
+    period: "2022",
     description: "Mastered data manipulation, analysis, and visualization techniques using Python and SQL. Developed skills in database management and data extraction.",
     certificateUrl: "#"
   }
@@ -113,8 +121,8 @@ export const education = [
 
 // Contact information
 export const contactInfo = {
-  email: "bhavyasri@example.com",
-  linkedin: "https://linkedin.com/in/bhavyasri",
+  email: "goddatibhavyasri@gmail.com",
+  linkedin: "https://www.linkedin.com/in/goddati-bhavyasri-b67a23253/",
   github: "https://github.com/Bhavyasri0088",
-  resumeUrl: "#"
+  resumeUrl: "/assets/resume.pdf"
 };

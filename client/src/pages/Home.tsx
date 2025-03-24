@@ -15,27 +15,27 @@ const Home = () => {
     <section 
       className="min-h-screen flex items-center justify-center relative overflow-hidden"
       style={{
-        backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('/static/aibg.jpg')`,
+        backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('/images/background.jpg')`,
         backgroundSize: 'cover',
         backgroundPosition: 'center'
       }}
     >
       <div className="absolute inset-0 bg-gradient-to-b from-background/50 to-background/90 z-0"></div>
       
-      <div className="container mx-auto px-4 pt-24 text-center relative z-10">
+      <div className="container mx-auto px-4 pt-24 text-left relative z-10">
         <motion.h1 
           className="text-4xl md:text-6xl font-bold mb-4 font-sans tracking-tight"
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
         >
-          Goddati Bhavyasri
+          I am Goddati Bhavyasri
         </motion.h1>
         
         <RoleAnimation roles={roles} />
         
         <motion.p 
-          className="text-base md:text-lg text-muted-foreground max-w-2xl mx-auto mb-8 leading-relaxed"
+          className="text-base md:text-lg text-muted-foreground max-w-2xl mb-8 leading-relaxed"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.5, delay: 0.3 }}
@@ -44,7 +44,7 @@ const Home = () => {
         </motion.p>
         
         <motion.div 
-          className="flex flex-wrap justify-center gap-4"
+          className="flex flex-wrap justify-start gap-4"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.5 }}
