@@ -87,7 +87,7 @@ export const education = [
   },
   {
     type: "certification",
-    title: "Data Science Certification",
+    title: "DATA SCIENCE Certification",
     institution: "Excel-R",
     period: "2023",
     description: "Comprehensive data science program covering advanced analytics, machine learning, and data visualization techniques.",
@@ -95,7 +95,7 @@ export const education = [
   },
   {
     type: "internship",
-    title: "Data Science Internship",
+    title: "DATA SCIENCE Internship",
     institution: "Excel-R",
     period: "2023",
     description: "Hands-on experience in implementing data science concepts, developing ML models, and data analysis.",
@@ -103,7 +103,7 @@ export const education = [
   },
   {
     type: "internship",
-    title: "Artificial Intelligence Internship",
+    title: "ARTIFICIAL INTELLIGENCE Internship",
     institution: "LOOMA IT SOLUTION",
     period: "2023",
     description: "Worked on AI projects implementing machine learning algorithms and deep learning models.",
@@ -111,7 +111,7 @@ export const education = [
   },
   {
     type: "internship",
-    title: "Python Programming Internship",
+    title: "PYTHON PROGRAMMING Internship",
     institution: "APSSDC",
     period: "2023",
     description: "Developed strong programming fundamentals and practical experience in Python development.",
@@ -123,11 +123,6 @@ export const education = [
     institution: "NPTEL",
     period: "2023",
     description: "Advanced course in pattern recognition techniques and their practical applications in data science.",
-    certificateUrl: "#"
-  },
-    institution: "ExcelR Solutions",
-    period: "2022",
-    description: "Mastered data manipulation, analysis, and visualization techniques using Python and SQL. Developed skills in database management and data extraction.",
     certificateUrl: "#"
   }
 ];
