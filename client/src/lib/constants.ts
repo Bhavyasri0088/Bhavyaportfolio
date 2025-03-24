@@ -130,7 +130,7 @@ export const education = [
 // Contact information
 export const contactInfo = {
   email: "goddatibhavyasri@gmail.com",
-  linkedin: "https://www.linkedin.com/in/goddati-bhavyasri-b67a23253/",
+  linkedin: "https://www.linkedin.com/in/goddati-bhavyasri-02ab37308",
   github: "https://github.com/Bhavyasri0088",
   resumeUrl: "/assets/resume.pdf"
 };
