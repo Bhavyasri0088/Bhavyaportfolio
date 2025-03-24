@@ -103,7 +103,7 @@ const FakeNewsVisualization = () => {
         >
           <CartesianGrid strokeDasharray="3 3" opacity={0.1} />
           <XAxis dataKey="name" />
-          <YAxis domain={[0, 10]} />
+          <YAxis domain={[0, 20]} />
           <Tooltip 
             formatter={(value: number) => [`${value}%`, 'Accuracy']}
             contentStyle={{ backgroundColor: 'rgba(0, 0, 0, 0.8)', border: 'none' }}
