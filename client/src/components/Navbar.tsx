@@ -39,7 +39,7 @@ const Navbar = () => {
     >
       <div className="container mx-auto px-4 py-4 flex justify-between items-center">
         <Link href="/" className="text-xl font-bold font-sans">
-          <span className="text-primary">P</span>ORTFOLIO<span className="text-secondary">.</span>
+          PORTFOLIO
         </Link>
 
         {/* Desktop Navigation */}

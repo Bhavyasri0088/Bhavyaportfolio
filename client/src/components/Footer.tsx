@@ -12,7 +12,7 @@ const Footer = () => {
           
           <div className="flex space-x-4">
             <a 
-              href="mailto:bhavyasri@example.com" 
+              href="mailto:goddatibhavyasri@gmail.com" 
               className="text-muted-foreground hover:text-primary transition-colors"
               aria-label="Email"
             >

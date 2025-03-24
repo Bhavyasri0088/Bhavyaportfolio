@@ -1,135 +1,174 @@
-import { useState, useEffect } from "react";
-import { Card, CardContent } from "@/components/ui/card";
-import { motion } from "framer-motion";
-import { PieChart, Pie, Cell, ResponsiveContainer, BarChart, Bar, XAxis, Tooltip } from "recharts";
-import { churnData, churnByTenure } from "@/lib/visualizationData";
+import { useEffect, useState } from 'react';
+import { 
+  BarChart, 
+  Bar, 
+  XAxis, 
+  YAxis, 
+  CartesianGrid, 
+  Tooltip, 
+  Legend, 
+  ResponsiveContainer,
+  PieChart,
+  Pie,
+  Cell
+} from 'recharts';
+import { motion } from 'framer-motion';
+import { churnData, churnByTenure, modelMetrics } from '@/lib/visualizationData';
+import DataVisualization from './DataVisualization';
 
-const COLORS = ["#F97316", "#3B82F6", "#10B981", "#8B5CF6"];
+const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042', '#A28DFF', '#FF6B6B'];
 
 const ChurnVisualization = () => {
-  const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
-  const [animatedChurnData, setAnimatedChurnData] = useState(
-    churnData.map(item => ({ ...item, value: 0 }))
-  );
-  const [animatedTenureData, setAnimatedTenureData] = useState(
-    churnByTenure.map(item => ({ ...item, churnRate: 0 }))
-  );
+  const [activeIndex, setActiveIndex] = useState(0);
+  const [view, setView] = useState<'distribution' | 'tenure' | 'model'>('distribution');
 
   useEffect(() => {
-    const timer = setTimeout(() => {
-      setAnimatedChurnData(churnData);
-    }, 500);
+    const interval = setInterval(() => {
+      setView(prev => {
+        if (prev === 'distribution') return 'tenure';
+        if (prev === 'tenure') return 'model';
+        return 'distribution';
+      });
+    }, 5000);
 
-    const tenureTimer = setTimeout(() => {
-      setAnimatedTenureData(churnByTenure);
-    }, 1000);
-
-    return () => {
-      clearTimeout(timer);
-      clearTimeout(tenureTimer);
-    };
+    return () => clearInterval(interval);
   }, []);
 
-  const renderCustomizedLabel = ({
-    cx,
-    cy,
-    midAngle,
-    innerRadius,
-    outerRadius,
-    percent,
-  }: any) => {
-    const radius = innerRadius + (outerRadius - innerRadius) * 0.5;
-    const x = cx + radius * Math.cos(-midAngle * (Math.PI / 180));
-    const y = cy + radius * Math.sin(-midAngle * (Math.PI / 180));
-
-    return (
-      <text
-        x={x}
-        y={y}
-        fill="white"
-        textAnchor="middle"
-        dominantBaseline="central"
-        fontSize={12}
-      >
-        {`${(percent * 100).toFixed(0)}%`}
-      </text>
-    );
+  const handlePieEnter = (_: any, index: number) => {
+    setActiveIndex(index);
   };
 
-  return (
-    <Card className="h-full">
-      <CardContent className="p-4">
-        <h4 className="text-lg font-medium mb-4">Churn Analysis Dashboard</h4>
-        <div className="h-64 mb-6">
-          <ResponsiveContainer width="100%" height="100%">
-            <PieChart>
-              <Pie
-                data={animatedChurnData}
-                cx="50%"
-                cy="50%"
-                labelLine={false}
-                label={renderCustomizedLabel}
-                outerRadius={80}
-                innerRadius={0}
-                dataKey="value"
-                animationDuration={1000}
-                animationBegin={0}
-              >
-                {animatedChurnData.map((entry, index) => (
-                  <Cell 
-                    key={`cell-${index}`} 
-                    fill={COLORS[index % COLORS.length]} 
-                    opacity={hoveredIndex === index ? 1 : 0.8}
-                    stroke={hoveredIndex === index ? "#fff" : "none"}
-                    strokeWidth={2}
-                    onMouseEnter={() => setHoveredIndex(index)}
-                    onMouseLeave={() => setHoveredIndex(null)}
-                  />
-                ))}
-              </Pie>
-              <Tooltip 
-                formatter={(value: number, name: string) => [`${value}%`, name]} 
-                contentStyle={{ backgroundColor: '#1E1E1E', border: 'none', borderRadius: '4px' }}
-                labelStyle={{ color: '#B3B3B3' }}
+  const renderChurnDistribution = () => (
+    <motion.div
+      key="distribution"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      className="h-full w-full"
+    >
+      <h3 className="text-center text-md mb-4">Customer Churn Distribution</h3>
+      <ResponsiveContainer width="100%" height={220}>
+        <PieChart>
+          <Pie
+            data={churnData}
+            cx="50%"
+            cy="50%"
+            innerRadius={60}
+            outerRadius={80}
+            paddingAngle={5}
+            dataKey="value"
+            onMouseEnter={handlePieEnter}
+          >
+            {churnData.map((entry, index) => (
+              <Cell 
+                key={`cell-${index}`} 
+                fill={COLORS[index % COLORS.length]} 
+                stroke={activeIndex === index ? '#fff' : 'transparent'}
+                strokeWidth={activeIndex === index ? 2 : 0}
               />
-            </PieChart>
-          </ResponsiveContainer>
-        </div>
+            ))}
+          </Pie>
+          <Tooltip 
+            formatter={(value: number) => [`${value}%`, 'Percentage']}
+            contentStyle={{ backgroundColor: 'rgba(0, 0, 0, 0.8)', border: 'none' }}
+          />
+          <Legend />
+        </PieChart>
+      </ResponsiveContainer>
+    </motion.div>
+  );
 
-        <div>
-          <p className="text-sm text-muted-foreground mb-2">Churn Rate by Customer Tenure</p>
-          <div className="h-32">
-            <ResponsiveContainer width="100%" height="100%">
-              <BarChart data={animatedTenureData}>
-                <XAxis dataKey="name" tick={{ fontSize: 10, fill: '#B3B3B3' }} axisLine={false} tickLine={false} />
-                <Tooltip 
-                  formatter={(value: number) => [`${value}%`, 'Churn Rate']} 
-                  contentStyle={{ backgroundColor: '#1E1E1E', border: 'none', borderRadius: '4px' }}
-                  labelStyle={{ color: '#B3B3B3' }}
-                />
-                <Bar 
-                  dataKey="churnRate" 
-                  fill="#3B82F6" 
-                  radius={[4, 4, 0, 0]}
-                  animationDuration={1500}
-                  animationBegin={300}
-                >
-                  {animatedTenureData.map((entry, index) => (
-                    <Cell 
-                      key={`cell-${index}`} 
-                      fill="#3B82F6" 
-                      opacity={hoveredIndex === index ? 1 : 0.8}
-                      onMouseEnter={() => setHoveredIndex(index)}
-                      onMouseLeave={() => setHoveredIndex(null)}
-                    />
-                  ))}
-                </Bar>
-              </BarChart>
-            </ResponsiveContainer>
-          </div>
+  const renderChurnByTenure = () => (
+    <motion.div
+      key="tenure"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      className="h-full w-full"
+    >
+      <h3 className="text-center text-md mb-4">Churn Rate by Tenure</h3>
+      <ResponsiveContainer width="100%" height={220}>
+        <BarChart
+          data={churnByTenure}
+          margin={{ top: 5, right: 30, left: 20, bottom: 5 }}
+        >
+          <CartesianGrid strokeDasharray="3 3" opacity={0.1} />
+          <XAxis dataKey="name" />
+          <YAxis />
+          <Tooltip 
+            formatter={(value: number) => [`${value}%`, 'Churn Rate']}
+            contentStyle={{ backgroundColor: 'rgba(0, 0, 0, 0.8)', border: 'none' }}
+          />
+          <Bar dataKey="value" name="Churn Rate" fill="#FF6B6B" radius={[4, 4, 0, 0]}>
+            {churnByTenure.map((entry, index) => (
+              <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+            ))}
+          </Bar>
+        </BarChart>
+      </ResponsiveContainer>
+    </motion.div>
+  );
+
+  const renderModelPerformance = () => (
+    <motion.div
+      key="model"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      className="h-full w-full"
+    >
+      <h3 className="text-center text-md mb-4">Model Performance Metrics</h3>
+      <ResponsiveContainer width="100%" height={220}>
+        <BarChart
+          data={modelMetrics}
+          margin={{ top: 5, right: 30, left: 20, bottom: 5 }}
+        >
+          <CartesianGrid strokeDasharray="3 3" opacity={0.1} />
+          <XAxis dataKey="name" />
+          <YAxis />
+          <Tooltip 
+            formatter={(value: number) => [`${value.toFixed(2)}`, 'Score']}
+            contentStyle={{ backgroundColor: 'rgba(0, 0, 0, 0.8)', border: 'none' }}
+          />
+          <Bar dataKey="value" name="Score" fill="#8884d8" radius={[4, 4, 0, 0]}>
+            {modelMetrics.map((entry, index) => (
+              <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+            ))}
+          </Bar>
+        </BarChart>
+      </ResponsiveContainer>
+    </motion.div>
+  );
+
+  return (
+    <DataVisualization title="Telecom Customer Churn Analysis">
+      <div className="flex flex-col h-full">
+        <div className="flex justify-center space-x-2 mb-2">
+          <button 
+            onClick={() => setView('distribution')}
+            className={`text-xs px-2 py-1 rounded-full ${view === 'distribution' ? 'bg-primary text-white' : 'bg-muted'}`}
+          >
+            Distribution
+          </button>
+          <button 
+            onClick={() => setView('tenure')}
+            className={`text-xs px-2 py-1 rounded-full ${view === 'tenure' ? 'bg-primary text-white' : 'bg-muted'}`}
+          >
+            By Tenure
+          </button>
+          <button 
+            onClick={() => setView('model')}
+            className={`text-xs px-2 py-1 rounded-full ${view === 'model' ? 'bg-primary text-white' : 'bg-muted'}`}
+          >
+            Model Metrics
+          </button>
         </div>
-      </CardContent>
-    </Card>
+        
+        {view === 'distribution' && renderChurnDistribution()}
+        {view === 'tenure' && renderChurnByTenure()}
+        {view === 'model' && renderModelPerformance()}
+      </div>
+    </DataVisualization>
   );
 };
 
