@@ -19,15 +19,11 @@ import DataVisualization from './DataVisualization';
 const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042', '#A28DFF', '#FF6B6B'];
 
 const ChurnVisualization = () => {
-  const [view, setView] = useState<'distribution' | 'tenure' | 'model'>('distribution');
+  const [view, setView] = useState<'distribution' | 'model'>('distribution');
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setView(prev => {
-        if (prev === 'distribution') return 'tenure';
-        if (prev === 'tenure') return 'model';
-        return 'distribution';
-      });
+      setView(prev => prev === 'distribution' ? 'model' : 'distribution');
     }, 5000);
 
     return () => clearInterval(interval);
@@ -147,26 +143,19 @@ const ChurnVisualization = () => {
         <div className="flex justify-center space-x-2 mb-2">
           <button 
             onClick={() => setView('distribution')}
-            className={`text-xs px-2 py-1 rounded-full ${view === 'distribution' ? 'bg-primary text-white' : 'bg-muted'}`}
+            className={`text-xs px-2 py-1 rounded-full ${view === 'distribution' ? 'bg-primary text-white' : 'bg-muted text-white'}`}
           >
             Distribution
           </button>
           <button 
-            onClick={() => setView('tenure')}
-            className={`text-xs px-2 py-1 rounded-full ${view === 'tenure' ? 'bg-primary text-white' : 'bg-muted'}`}
-          >
-            Tenure
-          </button>
-          <button 
             onClick={() => setView('model')}
-            className={`text-xs px-2 py-1 rounded-full ${view === 'model' ? 'bg-primary text-white' : 'bg-muted'}`}
+            className={`text-xs px-2 py-1 rounded-full ${view === 'model' ? 'bg-primary text-white' : 'bg-muted text-white'}`}
           >
             Model Metrics
           </button>
         </div>
 
         {view === 'distribution' && renderChurnDistribution()}
-        {view === 'tenure' && renderChurnByTenure()}
         {view === 'model' && renderModelPerformance()}
       </div>
     </DataVisualization>
