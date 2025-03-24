@@ -198,13 +198,12 @@ const Home = () => {
       <section 
         className="min-h-screen flex items-center justify-center relative overflow-hidden"
         style={{
-          backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('/images/background.jpg')`,
+          backgroundImage: `url('/images/background.jpg')`,
           backgroundSize: 'cover',
           backgroundPosition: 'center',
           backgroundRepeat: 'no-repeat'
         }}
       >
-        <div className="absolute inset-0 bg-gradient-to-b from-background/50 to-background/90 z-0"></div>
         
         <div className="container mx-auto px-4 pt-24 text-left relative z-10">
           <motion.h1 
