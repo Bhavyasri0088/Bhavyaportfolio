@@ -37,23 +37,14 @@ const accuracyData = [
 const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042', '#A28DFF', '#FF6B6B'];
 
 const FakeNewsVisualization = () => {
-  const [view, setView] = useState<'features' | 'performance' | 'comparison'>('features');
+  const [view, setView] = useState<'accuracy' | 'comparison'>('accuracy');
 
-  // Set initial view to model comparison
   useEffect(() => {
-    // Set initial view to comparison
-    setView('comparison');
-    
-    // Skip auto-rotation for better user control
-    // const interval = setInterval(() => {
-    //   setView(prev => {
-    //     if (prev === 'features') return 'performance';
-    //     if (prev === 'performance') return 'comparison';
-    //     return 'features';
-    //   });
-    // }, 5000);
-    
-    // return () => clearInterval(interval);
+    const interval = setInterval(() => {
+      setView(prev => prev === 'accuracy' ? 'comparison' : 'accuracy');
+    }, 5000);
+
+    return () => clearInterval(interval);
   }, []);
 
   const renderFeatureImportance = () => (
@@ -170,7 +161,7 @@ const FakeNewsVisualization = () => {
             Models
           </button>
         </div>
-        
+
         <AnimatePresence mode="wait">
           {view === 'features' && renderFeatureImportance()}
           {view === 'performance' && renderClassificationAccuracy()}

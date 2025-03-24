@@ -19,24 +19,18 @@ import DataVisualization from './DataVisualization';
 const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042', '#A28DFF', '#FF6B6B'];
 
 const ChurnVisualization = () => {
-  const [activeIndex, setActiveIndex] = useState(0);
   const [view, setView] = useState<'distribution' | 'tenure' | 'model'>('distribution');
 
-  // Initialize view directly to show tenure data
   useEffect(() => {
-    // Set initial view to tenure
-    setView('tenure');
-    
-    // Skip auto-rotation for better user control
-    // const interval = setInterval(() => {
-    //   setView(prev => {
-    //     if (prev === 'distribution') return 'tenure';
-    //     if (prev === 'tenure') return 'model';
-    //     return 'distribution';
-    //   });
-    // }, 5000);
-    
-    // return () => clearInterval(interval);
+    const interval = setInterval(() => {
+      setView(prev => {
+        if (prev === 'distribution') return 'tenure';
+        if (prev === 'tenure') return 'model';
+        return 'distribution';
+      });
+    }, 5000);
+
+    return () => clearInterval(interval);
   }, []);
 
   const handlePieEnter = (_: any, index: number) => {
@@ -145,6 +139,8 @@ const ChurnVisualization = () => {
     </motion.div>
   );
 
+  const [activeIndex, setActiveIndex] = useState(0);
+
   return (
     <DataVisualization title="Telecom Customer Churn Analysis">
       <div className="flex flex-col h-full">
@@ -156,14 +152,21 @@ const ChurnVisualization = () => {
             Distribution
           </button>
           <button 
+            onClick={() => setView('tenure')}
+            className={`text-xs px-2 py-1 rounded-full ${view === 'tenure' ? 'bg-primary text-white' : 'bg-muted'}`}
+          >
+            Tenure
+          </button>
+          <button 
             onClick={() => setView('model')}
             className={`text-xs px-2 py-1 rounded-full ${view === 'model' ? 'bg-primary text-white' : 'bg-muted'}`}
           >
             Model Metrics
           </button>
         </div>
-        
+
         {view === 'distribution' && renderChurnDistribution()}
+        {view === 'tenure' && renderChurnByTenure()}
         {view === 'model' && renderModelPerformance()}
       </div>
     </DataVisualization>
