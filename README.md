@@ -1,4 +1,5 @@
 🚀 About the Portfolio
+
 This is the personal portfolio website of Goddati Bhavyasri, a data science fresher passionate about solving real-world problems through machine learning, data analysis, and visualization. The portfolio showcases various projects, skills, and educational qualifications, offering a glimpse into her data science expertise.
 
 🛠️ Tech Stack Used
@@ -99,7 +100,7 @@ arduino
 Copy
 Edit
 http://localhost:3000
-🌐 Live Demo
+🌐 https://github.com/Bhavyasri0088/Bhavyaportfolio
 View Live Portfolio
 (Add the live link once deployed)
 
@@ -120,8 +121,9 @@ Create a new branch (feature/new-section)
 Commit changes and submit a pull request
 
 🔗 Connect with Me
-💼 
+💼 https://www.linkedin.com/in/goddati-bhavyasri-02ab37308
 
-📧 goddatibhac
+📧 goddatibhabhavya@gmail.com
 
-🌐 GitHub
+🌐  https://github.com/Bhavyasri0088/Datascience.git
+
