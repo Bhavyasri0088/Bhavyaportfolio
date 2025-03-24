@@ -97,7 +97,7 @@ export const education = [
     type: "internship",
     title: "DATA SCIENCE Internship",
     institution: "Excel-R",
-    period: "2023",
+    period: "",
     description: "Hands-on experience in implementing data science concepts, developing ML models, and data analysis.",
     certificateUrl: "#"
   },
@@ -105,7 +105,7 @@ export const education = [
     type: "internship",
     title: "ARTIFICIAL INTELLIGENCE Internship",
     institution: "LOOMA IT SOLUTION",
-    period: "2023",
+    period: "",
     description: "Worked on AI projects implementing machine learning algorithms and deep learning models.",
     certificateUrl: "#"
   },
@@ -113,7 +113,7 @@ export const education = [
     type: "internship",
     title: "PYTHON PROGRAMMING Internship",
     institution: "APSSDC",
-    period: "2023",
+    period: "",
     description: "Developed strong programming fundamentals and practical experience in Python development.",
     certificateUrl: "#"
   },
