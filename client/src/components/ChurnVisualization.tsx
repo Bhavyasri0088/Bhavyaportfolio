@@ -22,16 +22,21 @@ const ChurnVisualization = () => {
   const [activeIndex, setActiveIndex] = useState(0);
   const [view, setView] = useState<'distribution' | 'tenure' | 'model'>('distribution');
 
+  // Initialize view directly to show tenure data
   useEffect(() => {
-    const interval = setInterval(() => {
-      setView(prev => {
-        if (prev === 'distribution') return 'tenure';
-        if (prev === 'tenure') return 'model';
-        return 'distribution';
-      });
-    }, 5000);
-
-    return () => clearInterval(interval);
+    // Set initial view to tenure
+    setView('tenure');
+    
+    // Skip auto-rotation for better user control
+    // const interval = setInterval(() => {
+    //   setView(prev => {
+    //     if (prev === 'distribution') return 'tenure';
+    //     if (prev === 'tenure') return 'model';
+    //     return 'distribution';
+    //   });
+    // }, 5000);
+    
+    // return () => clearInterval(interval);
   }, []);
 
   const handlePieEnter = (_: any, index: number) => {
