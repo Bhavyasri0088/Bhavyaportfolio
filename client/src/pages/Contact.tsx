@@ -28,25 +28,37 @@ const Contact = () => {
     setIsSubmitting(true);
     
     try {
-      // In a real implementation, this would send the form data to the server
-      // This is just a simulation for the demo
-      await new Promise(resolve => setTimeout(resolve, 1000));
-      
-      toast({
-        title: "Message sent!",
-        description: "Thank you for your message. I'll get back to you soon.",
+      // Send the form data to our API endpoint
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
       });
       
-      // Clear form
-      setFormData({
-        name: "",
-        email: "",
-        message: ""
-      });
+      const data = await response.json();
+      
+      if (response.ok) {
+        toast({
+          title: "Message sent!",
+          description: "Thank you for your message. I'll get back to you soon.",
+        });
+        
+        // Clear form
+        setFormData({
+          name: "",
+          email: "",
+          message: ""
+        });
+      } else {
+        throw new Error(data.message || 'Failed to send message');
+      }
     } catch (error) {
+      console.error('Contact form error:', error);
       toast({
         title: "Error sending message",
-        description: "Please try again later.",
+        description: error instanceof Error ? error.message : "Please try again later.",
         variant: "destructive"
       });
     } finally {
