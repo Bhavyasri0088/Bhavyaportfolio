@@ -1,9 +1,7 @@
-import { drizzle } from 'drizzle-orm/postgres-js';
-import { neon, neonConfig } from '@neondatabase/serverless';
+import { drizzle } from 'drizzle-orm/neon-http';
+import { neon } from '@neondatabase/serverless';
 import { users, projects, contactMessages } from '../shared/schema';
-
-// Optional: Disable SSL for local development
-// neonConfig.useSecureWebSockets = false;
+import { eq } from 'drizzle-orm';
 
 // Use environment variables
 const connectionString = process.env.DATABASE_URL!;
@@ -20,7 +18,7 @@ export const getAllProjects = async () => {
 };
 
 export const getProjectById = async (id: number) => {
-  const result = await db.select().from(projects).where(({ and, eq }) => eq(projects.id, id));
+  const result = await db.select().from(projects).where(eq(projects.id, id));
   return result[0];
 };
 
@@ -42,7 +40,7 @@ export const markMessageAsRead = async (id: number) => {
   const result = await db
     .update(contactMessages)
     .set({ read: true })
-    .where(({ eq }) => eq(contactMessages.id, id))
+    .where(eq(contactMessages.id, id))
     .returning();
   return result[0];
 };

@@ -10,6 +10,7 @@ import {
   type InsertContactMessage
 } from "@shared/schema";
 import { db } from "./db";
+import { eq } from "drizzle-orm";
 
 // modify the interface with any CRUD methods
 // you might need
@@ -63,9 +64,13 @@ export class MemStorage implements IStorage {
   async createUser(insertUser: InsertUser): Promise<User> {
     const id = this.currentUserId++;
     const now = new Date();
+    // Ensure email is defined as null if not provided
+    const email = insertUser.email !== undefined ? insertUser.email : null;
+    
     const user: User = { 
       ...insertUser, 
       id, 
+      email,
       isAdmin: false,
       createdAt: now
     };
@@ -85,11 +90,21 @@ export class MemStorage implements IStorage {
   async createProject(project: InsertProject): Promise<Project> {
     const id = this.currentProjectId++;
     const now = new Date();
+    
+    // Ensure all fields have proper values to match Project type
+    const insights = project.insights !== undefined ? project.insights : null;
+    const technologies = project.technologies !== undefined ? project.technologies : null;
+    const reportUrl = project.reportUrl !== undefined ? project.reportUrl : null;
+    
     const newProject: Project = {
       ...project,
       id,
+      insights,
+      technologies,
+      reportUrl,
       createdAt: now
     };
+    
     this.projects.set(id, newProject);
     return newProject;
   }
@@ -130,12 +145,12 @@ export class MemStorage implements IStorage {
 export class PgStorage implements IStorage {
   // User methods
   async getUser(id: number): Promise<User | undefined> {
-    const result = await db.select().from(users).where(({ eq }) => eq(users.id, id));
+    const result = await db.select().from(users).where(eq(users.id, id));
     return result[0];
   }
 
   async getUserByUsername(username: string): Promise<User | undefined> {
-    const result = await db.select().from(users).where(({ eq }) => eq(users.username, username));
+    const result = await db.select().from(users).where(eq(users.username, username));
     return result[0];
   }
 
@@ -150,7 +165,7 @@ export class PgStorage implements IStorage {
   }
   
   async getProject(id: number): Promise<Project | undefined> {
-    const result = await db.select().from(projects).where(({ eq }) => eq(projects.id, id));
+    const result = await db.select().from(projects).where(eq(projects.id, id));
     return result[0];
   }
   
@@ -165,7 +180,7 @@ export class PgStorage implements IStorage {
   }
   
   async getContactMessage(id: number): Promise<ContactMessage | undefined> {
-    const result = await db.select().from(contactMessages).where(({ eq }) => eq(contactMessages.id, id));
+    const result = await db.select().from(contactMessages).where(eq(contactMessages.id, id));
     return result[0];
   }
   
@@ -178,7 +193,7 @@ export class PgStorage implements IStorage {
     const result = await db
       .update(contactMessages)
       .set({ read: true })
-      .where(({ eq }) => eq(contactMessages.id, id))
+      .where(eq(contactMessages.id, id))
       .returning();
     return result[0];
   }
