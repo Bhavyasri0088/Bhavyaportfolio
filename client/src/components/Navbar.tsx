@@ -1,20 +1,38 @@
 import { useState, useEffect } from "react";
-import { Link, useLocation } from "wouter";
+import { Link } from "wouter";
 import { Button } from "@/components/ui/button";
 import {
   Sheet,
   SheetContent,
   SheetTrigger,
+  SheetClose
 } from "@/components/ui/sheet";
 import { Menu } from "lucide-react";
 
 const Navbar = () => {
-  const [location] = useLocation();
   const [isScrolled, setIsScrolled] = useState(false);
+  const [activeSection, setActiveSection] = useState("home");
 
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 20);
+      
+      // Determine active section based on scroll position
+      const sections = ["home", "projects", "skills", "education", "contact"];
+      const scrollPosition = window.scrollY + 100; // Adding offset for the navbar
+
+      for (const section of sections) {
+        const element = document.getElementById(section);
+        if (element) {
+          const offsetTop = element.offsetTop;
+          const offsetBottom = offsetTop + element.offsetHeight;
+          
+          if (scrollPosition >= offsetTop && scrollPosition < offsetBottom) {
+            setActiveSection(section);
+            break;
+          }
+        }
+      }
     };
 
     window.addEventListener("scroll", handleScroll);
@@ -22,12 +40,22 @@ const Navbar = () => {
   }, []);
 
   const navLinks = [
-    { href: "/", label: "Home" },
-    { href: "/projects", label: "Projects" },
-    { href: "/skills", label: "Skills" },
-    { href: "/education", label: "Education" },
-    { href: "/contact", label: "Contact" },
+    { href: "#home", label: "Home", id: "home" },
+    { href: "#projects", label: "Projects", id: "projects" },
+    { href: "#skills", label: "Skills", id: "skills" },
+    { href: "#education", label: "Education", id: "education" },
+    { href: "#contact", label: "Contact", id: "contact" },
   ];
+
+  const scrollToSection = (sectionId: string) => {
+    const element = document.getElementById(sectionId);
+    if (element) {
+      window.scrollTo({
+        top: element.offsetTop - 80, // Offset for navbar height
+        behavior: "smooth"
+      });
+    }
+  };
 
   return (
     <header
@@ -38,22 +66,33 @@ const Navbar = () => {
       }`}
     >
       <div className="container mx-auto px-4 py-4 flex justify-between items-center">
-        <Link href="/" className="text-xl font-bold font-sans">
+        <a 
+          href="#home" 
+          className="text-xl font-bold font-sans"
+          onClick={(e) => {
+            e.preventDefault();
+            scrollToSection("home");
+          }}
+        >
           PORTFOLIO
-        </Link>
+        </a>
 
         {/* Desktop Navigation */}
         <nav className="hidden md:flex items-center space-x-8">
           {navLinks.map((link) => (
-            <Link 
+            <a 
               key={link.href} 
               href={link.href}
               className={`hover:text-primary transition-colors ${
-                location === link.href ? "text-primary" : "text-foreground"
+                activeSection === link.id ? "text-primary" : "text-foreground"
               }`}
+              onClick={(e) => {
+                e.preventDefault();
+                scrollToSection(link.id);
+              }}
             >
               {link.label}
-            </Link>
+            </a>
           ))}
         </nav>
 
@@ -67,17 +106,22 @@ const Navbar = () => {
           <SheetContent className="bg-background/95 backdrop-blur-sm">
             <nav className="flex flex-col gap-4 mt-8">
               {navLinks.map((link) => (
-                <Link 
-                  key={link.href} 
-                  href={link.href}
-                  className={`text-lg py-2 hover:text-primary transition-colors ${
-                    location === link.href
-                      ? "text-primary"
-                      : "text-foreground"
-                  }`}
-                >
-                  {link.label}
-                </Link>
+                <SheetClose asChild key={link.href}>
+                  <a 
+                    href={link.href}
+                    className={`text-lg py-2 hover:text-primary transition-colors ${
+                      activeSection === link.id
+                        ? "text-primary"
+                        : "text-foreground"
+                    }`}
+                    onClick={(e) => {
+                      e.preventDefault();
+                      scrollToSection(link.id);
+                    }}
+                  >
+                    {link.label}
+                  </a>
+                </SheetClose>
               ))}
             </nav>
           </SheetContent>
