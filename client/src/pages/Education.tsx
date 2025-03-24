@@ -39,12 +39,12 @@ const Education = () => {
             My academic background and professional certifications in data science and related fields.
           </p>
         </motion.div>
-        
+
         <div className="grid md:grid-cols-2 gap-8">
           {/* Education Column */}
           <div>
             <h3 className="text-2xl font-bold mb-6 border-b border-border pb-2">Education</h3>
-            
+
             <motion.div
               className="space-y-4"
               variants={container}
@@ -73,7 +73,7 @@ const Education = () => {
                     </Card>
                   </motion.div>
                 ))}
-              
+
               {education
                 .filter(item => item.type === "certification" && item.title === "Data Science Certification")
                 .map((edu, index) => (
@@ -87,14 +87,9 @@ const Education = () => {
                           <div>
                             <h4 className="text-lg font-bold mb-1">{edu.title}</h4>
                             <p className="text-muted-foreground text-sm mb-2">{edu.institution}, {edu.period}</p>
-                            <p className="text-muted-foreground text-sm mb-2">
+                            <p className="text-muted-foreground text-sm">
                               {edu.description}
                             </p>
-                            {edu.certificateUrl && (
-                              <a href={edu.certificateUrl} className="text-primary hover:text-primary/80 text-sm inline-flex items-center">
-                                <FileText size={14} className="mr-1" /> View Certificate
-                              </a>
-                            )}
                           </div>
                         </div>
                       </CardContent>
@@ -103,11 +98,11 @@ const Education = () => {
                 ))}
             </motion.div>
           </div>
-          
+
           {/* Certifications & Internships Column */}
           <div>
             <h3 className="text-2xl font-bold mb-6 border-b border-border pb-2">Certifications & Internships</h3>
-            
+
             <motion.div
               className="space-y-4"
               variants={container}
@@ -127,21 +122,16 @@ const Education = () => {
                           <div>
                             <h4 className="text-lg font-bold mb-1">{edu.title}</h4>
                             <p className="text-muted-foreground text-sm mb-2">{edu.institution}, {edu.period}</p>
-                            <p className="text-muted-foreground text-sm mb-2">
+                            <p className="text-muted-foreground text-sm">
                               {edu.description}
                             </p>
-                            {edu.certificateUrl && (
-                              <a href={edu.certificateUrl} className="text-primary hover:text-primary/80 text-sm inline-flex items-center">
-                                <FileText size={14} className="mr-1" /> View Certificate
-                              </a>
-                            )}
                           </div>
                         </div>
                       </CardContent>
                     </Card>
                   </motion.div>
                 ))}
-              
+
               {education
                 .filter(item => item.type === "certification" && item.title !== "Data Science Certification")
                 .map((edu, index) => (
@@ -155,14 +145,9 @@ const Education = () => {
                           <div>
                             <h4 className="text-lg font-bold mb-1">{edu.title}</h4>
                             <p className="text-muted-foreground text-sm mb-2">{edu.institution}, {edu.period}</p>
-                            <p className="text-muted-foreground text-sm mb-2">
+                            <p className="text-muted-foreground text-sm">
                               {edu.description}
                             </p>
-                            {edu.certificateUrl && (
-                              <a href={edu.certificateUrl} className="text-primary hover:text-primary/80 text-sm inline-flex items-center">
-                                <FileText size={14} className="mr-1" /> View Certificate
-                              </a>
-                            )}
                           </div>
                         </div>
                       </CardContent>

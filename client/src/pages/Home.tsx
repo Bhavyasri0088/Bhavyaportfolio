@@ -61,7 +61,7 @@ const Home = () => {
     "Machine Learning Enthusiast",
     "Data Visualization Expert"
   ];
-  
+
   // Projects Section - Fetch projects
   useEffect(() => {
     const fetchProjects = async () => {
@@ -70,16 +70,16 @@ const Home = () => {
         if (!response.ok) {
           throw new Error('Failed to fetch projects');
         }
-        
+
         const data = await response.json();
-        
+
         // If we have projects in the database, use them
         if (data && data.length > 0) {
           setProjects(data);
         } else {
           // Otherwise use our default projects from constants
           setProjects(defaultProjects);
-          
+
           // If database is empty, initialize it with our default projects
           defaultProjects.forEach(async (project) => {
             try {
@@ -102,14 +102,14 @@ const Home = () => {
           description: "Failed to fetch projects. Using default data.",
           variant: "destructive"
         });
-        
+
         // Fallback to default projects
         setProjects(defaultProjects);
       } finally {
         setLoading(false);
       }
     };
-    
+
     fetchProjects();
   }, [toast]);
 
@@ -122,7 +122,7 @@ const Home = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
-    
+
     try {
       // Send the form data to our API endpoint
       const response = await fetch('/api/contact', {
@@ -132,15 +132,15 @@ const Home = () => {
         },
         body: JSON.stringify(formData),
       });
-      
+
       const data = await response.json();
-      
+
       if (response.ok) {
         toast({
           title: "Message sent!",
           description: "Thank you for your message. I'll get back to you soon.",
         });
-        
+
         // Clear form
         setFormData({
           name: "",
@@ -204,7 +204,7 @@ const Home = () => {
           backgroundRepeat: 'no-repeat'
         }}
       >
-        
+
         <div className="container mx-auto px-4 pt-24 text-left relative z-10">
           <motion.h1 
             className="text-4xl md:text-6xl font-bold mb-4 font-sans tracking-tight"
@@ -214,9 +214,9 @@ const Home = () => {
           >
             I'm Goddati Bhavyasri
           </motion.h1>
-          
+
           <RoleAnimation roles={roles} />
-          
+
           <motion.p 
             className="text-base md:text-lg text-muted-foreground max-w-2xl mb-8 leading-relaxed"
             initial={{ opacity: 0 }}
@@ -225,7 +225,7 @@ const Home = () => {
           >
             Hello! I'm a passionate data scientist dedicated to transforming complex data into actionable insights. With expertise in Python, MySQL, and machine learning, I specialize in building predictive models and creating interactive visualizations that drive data-driven decisions.
           </motion.p>
-          
+
           <motion.div 
             className="flex flex-wrap justify-start gap-4"
             initial={{ opacity: 0, y: 20 }}
@@ -237,7 +237,7 @@ const Home = () => {
                 View Projects
               </a>
             </Button>
-            
+
             <Button asChild variant="outline" className="gap-2">
               <a href="#contact">
                 <Mail size={16} />
@@ -245,7 +245,7 @@ const Home = () => {
               </a>
             </Button>
           </motion.div>
-          
+
           <motion.div 
             className="mt-16 text-muted-foreground"
             initial={{ opacity: 0 }}
@@ -277,7 +277,7 @@ const Home = () => {
               Explore my data science projects with interactive visualizations and insightful analyses.
             </p>
           </motion.div>
-          
+
           <div className="space-y-12">
             {loading ? (
               // Skeleton loaders while loading
@@ -327,7 +327,7 @@ const Home = () => {
               My expertise in data science tools, programming languages, and frameworks that I utilize to deliver impactful results.
             </p>
           </motion.div>
-          
+
           <motion.div 
             className="grid md:grid-cols-2 gap-8"
             variants={container}
@@ -384,12 +384,12 @@ const Home = () => {
               My academic background and professional certifications in data science and related fields.
             </p>
           </motion.div>
-          
+
           <div className="grid md:grid-cols-2 gap-8">
             {/* Education Column */}
             <div>
               <h3 className="text-2xl font-bold mb-6 border-b border-border pb-2">Education</h3>
-              
+
               <motion.div
                 className="space-y-4"
                 variants={container}
@@ -419,7 +419,7 @@ const Home = () => {
                       </Card>
                     </motion.div>
                   ))}
-                
+
                 {education
                   .filter(item => item.type === "certification" && item.title === "DATA SCIENCE Certification")
                   .map((edu, index) => (
@@ -433,14 +433,9 @@ const Home = () => {
                             <div>
                               <h4 className="text-lg font-bold mb-1">{edu.title}</h4>
                               <p className="text-muted-foreground text-sm mb-2">{edu.institution}, {edu.period}</p>
-                              <p className="text-muted-foreground text-sm mb-2">
+                              <p className="text-muted-foreground text-sm">
                                 {edu.description}
                               </p>
-                              {edu.certificateUrl && (
-                                <a href={edu.certificateUrl} className="text-primary hover:text-primary/80 text-sm inline-flex items-center">
-                                  <FileText size={14} className="mr-1" /> View Certificate
-                                </a>
-                              )}
                             </div>
                           </div>
                         </CardContent>
@@ -449,11 +444,11 @@ const Home = () => {
                   ))}
               </motion.div>
             </div>
-            
+
             {/* Certifications & Internships Column */}
             <div>
               <h3 className="text-2xl font-bold mb-6 border-b border-border pb-2">Certifications & Internships</h3>
-              
+
               <motion.div
                 className="space-y-4"
                 variants={container}
@@ -474,21 +469,16 @@ const Home = () => {
                             <div>
                               <h4 className="text-lg font-bold mb-1">{edu.title}</h4>
                               <p className="text-muted-foreground text-sm mb-2">{edu.institution}, {edu.period}</p>
-                              <p className="text-muted-foreground text-sm mb-2">
+                              <p className="text-muted-foreground text-sm">
                                 {edu.description}
                               </p>
-                              {edu.certificateUrl && (
-                                <a href={edu.certificateUrl} className="text-primary hover:text-primary/80 text-sm inline-flex items-center">
-                                  <FileText size={14} className="mr-1" /> View Certificate
-                                </a>
-                              )}
                             </div>
                           </div>
                         </CardContent>
                       </Card>
                     </motion.div>
                   ))}
-                
+
                 {education
                   .filter(item => item.type === "certification" && item.title !== "DATA SCIENCE Certification")
                   .map((edu, index) => (
@@ -502,14 +492,9 @@ const Home = () => {
                             <div>
                               <h4 className="text-lg font-bold mb-1">{edu.title}</h4>
                               <p className="text-muted-foreground text-sm mb-2">{edu.institution}, {edu.period}</p>
-                              <p className="text-muted-foreground text-sm mb-2">
+                              <p className="text-muted-foreground text-sm">
                                 {edu.description}
                               </p>
-                              {edu.certificateUrl && (
-                                <a href={edu.certificateUrl} className="text-primary hover:text-primary/80 text-sm inline-flex items-center">
-                                  <FileText size={14} className="mr-1" /> View Certificate
-                                </a>
-                              )}
                             </div>
                           </div>
                         </CardContent>
@@ -537,7 +522,7 @@ const Home = () => {
               Have a project in mind or want to discuss potential collaborations? Reach out to me through any of these channels.
             </p>
           </motion.div>
-          
+
           <div className="grid md:grid-cols-2 gap-8">
             <motion.div
               initial={{ opacity: 0, x: -20 }}
@@ -548,7 +533,7 @@ const Home = () => {
               <Card>
                 <CardContent className="p-8">
                   <h3 className="text-2xl font-bold mb-6">Contact Information</h3>
-                  
+
                   <div className="space-y-4">
                     <div className="flex items-center">
                       <div className="bg-primary/20 p-3 rounded-lg mr-4">
@@ -564,7 +549,7 @@ const Home = () => {
                         </a>
                       </div>
                     </div>
-                    
+
                     <div className="flex items-center">
                       <div className="bg-secondary/20 p-3 rounded-lg mr-4">
                         <Linkedin className="text-secondary" />
@@ -581,7 +566,7 @@ const Home = () => {
                         </a>
                       </div>
                     </div>
-                    
+
                     <div className="flex items-center">
                       <div className="bg-tertiary/20 p-3 rounded-lg mr-4">
                         <Github className="text-tertiary" />
@@ -599,7 +584,7 @@ const Home = () => {
                       </div>
                     </div>
                   </div>
-                  
+
                   <div className="mt-8">
                     <Button asChild className="flex items-center gap-2">
                       <a href={contactInfo.resumeUrl} download>
@@ -611,7 +596,7 @@ const Home = () => {
                 </CardContent>
               </Card>
             </motion.div>
-            
+
             <motion.div
               initial={{ opacity: 0, x: 20 }}
               whileInView={{ opacity: 1, x: 0 }}
@@ -621,7 +606,7 @@ const Home = () => {
               <Card>
                 <CardContent className="p-8">
                   <h3 className="text-2xl font-bold mb-6">Send a Message</h3>
-                  
+
                   <form onSubmit={handleSubmit} className="space-y-4">
                     <div className="space-y-2">
                       <Label htmlFor="name">Name</Label>
@@ -634,7 +619,7 @@ const Home = () => {
                         required
                       />
                     </div>
-                    
+
                     <div className="space-y-2">
                       <Label htmlFor="email">Email</Label>
                       <Input
@@ -647,7 +632,7 @@ const Home = () => {
                         required
                       />
                     </div>
-                    
+
                     <div className="space-y-2">
                       <Label htmlFor="message">Message</Label>
                       <Textarea
@@ -660,7 +645,7 @@ const Home = () => {
                         required
                       />
                     </div>
-                    
+
                     <Button 
                       type="submit" 
                       className="w-full flex items-center justify-center gap-2"
