@@ -89,7 +89,7 @@ export const education = [
     type: "certification",
     title: "DATA SCIENCE Certification",
     institution: "Excel-R",
-    period: "2024",
+    period: "",
     description: "Comprehensive data science program covering advanced analytics, machine learning, and data visualization techniques.",
     certificateUrl: "#"
   },
